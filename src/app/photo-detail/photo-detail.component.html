@@ -1,0 +1,22 @@
+<div class="detail-container">
+	<button class="back" (click)="goBack()">BACK TO SEARCH</button>
+
+  <div class="photo">
+    <div [class.loading]="toggleLoading" hidden><p>Loading Photos...</p></div>
+    <div *ngIf="photoInfo" class="photo-info">
+      <img class="photoImg" [src]="photoInfo.photoLink">
+      <p><b>Title:</b> {{photoInfo.title._content}}</p>
+      <p><b>Description:</b> <span [innerHTML]="photoInfo.description._content"></span></p>
+      <p><b>Views:</b> {{photoInfo.views}}</p>
+      <p><b>Date Uploaded:</b> {{photoInfo.dateuploaded}}</p>
+      <p><b>Date Posted:</b> {{photoInfo.dates.posted}}</p>
+      <p><b>Last Update Date:</b> {{photoInfo.dates.lastupdate}}</p>
+      <p><b>Username:</b> <img class="iconUser" [src]="userIcon" alt=""> {{photoInfo.owner.username}}</p>
+      <p><b>Real Name:</b> {{photoInfo.owner.realname}}</p>
+      <p><b>Location:</b> {{photoInfo.owner.location}}</p> 
+      <p><b>Tags:</b> <ng-container *ngFor="let tag of tags; let isLast=last"> {{tag._content}}{{isLast ? '.' : ', '}} </ng-container> </p>
+      <p><b>Comments:</b> {{photoInfo.comments._content}}</p>
+      <p class="comments" *ngFor="let comment of comments"><b class="comments-author">[ {{comment.authorname}} ]:</b> {{comment._content}}</p>
+    </div>
+  </div>
+</div>

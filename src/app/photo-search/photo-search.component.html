@@ -1,0 +1,26 @@
+<div class="container">
+	<div class="search-form">
+		<form [formGroup]="searchForm" (ngSubmit)="formSubmit()">
+			<input type="text" class="searchText" formControlName="textField" placeholder="search photos...">
+    <input type="submit" class="searchBtn" [value]="searchBtnText">
+  </form>
+</div>
+
+<div class="search-container" *ngIf="this.text">
+	<div class="search">
+    <div [class.loading]="toggleLoading" hidden><p>Loading Photos...</p></div>
+     <div [class.noPhoto]="noPhotoFound" hidden><p>No Photos Found.</p></div>
+		<div class="photo" *ngFor="let photo of photoData" (click)="showInfo(photo.id)">
+			<img [src]="photo.photoLink" alt="">
+    <p class="photo-title">{{photo.title}}</p>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="!noPhotoFound">
+    <!-- <div [class.loading]="toggleLoading" hidden><p></p></div> -->
+    <div class="page prev" (click)="goToPrevPage()" [class.disabled]="curPage == 1" >Previous</div>
+    <div class="page" *ngFor="let page of numPage" [class.selected]="page == curPage" (click)="goToBtnPage(page)">{{page}}</div>
+    <div class="page next" (click)="goToNextPage()">Next</div>
+  </div>
+</div>
+</div>
